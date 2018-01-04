@@ -1,3 +1,14 @@
+-- ipv6-wip
+Not Done:
+* Track both IPv4 and IPv6 peers and allow mixed swarms
+    * Implemented via BEP 0007 (http://www.bittorrent.org/beps/bep_0007.html)
+    * DB Changes:
+        * ALTER TABLE xbt_snatched CHANGE `IP` `ipv4` varchar(15);
+        * ALTER TABLE xbt_snatched ADD COLUMN `ipv6` varchar(45);
+        * ALTER TABLE xbt_files_users CHANGE `ip` `ipv4` varchar(15);
+        * ALTER TABLE xbt_files_users ADD COLUMN `ipv6` varchar(45);
+* Implement compact peer lists (BEP 0023) (http://www.bittorrent.org/beps/bep_0023.html)
+
 -- 2.0.0 (2019-10-22)
 BREAKING
 * Write leech stats into their own dedicated tables (users_leech_stats, torrents_leech_stats)
@@ -18,7 +29,6 @@ Add logging directive to config to configure how Ocelot logs and where it logs
 Add deamon (--daemon, -d) to run Ocelot as a daemon
 Move source code into src/ directory
 Add Vagrantfile and Dockerfile for running Ocelot
-
 -- 1.0 (2015-01-26)
 NOTE: This version requires the following database change:
 ALTER TABLE xbt_files_users DROP PRIMARY KEY, ADD PRIMARY KEY (peer_id,fid,uid)

@@ -96,13 +96,13 @@ int main(int argc, char **argv) {
 	std::string conf_file_path("./ocelot.conf");
 
 	for (int i = 1; i < argc; i++) {
-		if (strcmp(argv[i], "-v") == 0) {
+		if (strcmp(argv[i], "-v") == 0 || strcmp(argv[i], "--verbose") == 0) {
 			verbose = true;
 		}
 		else if (strcmp(argv[i], "-d") == 0 || strcmp(argv[i], "--daemonize") == 0) {
 			daemonize = true;
 		}
-		else if (strcmp(argv[i], "-c") == 0 && i < argc - 1) {
+		else if ((strcmp(argv[i], "-c") == 0 || strcmp(argv[i], "--config")) && i < argc - 1) {
 			conf_arg = true;
 			conf_file_path = argv[++i];
 		}
@@ -111,7 +111,7 @@ int main(int argc, char **argv) {
 			return 0;
 		}
 		else {
-			std::cout << "Usage: " << argv[0] << " [-v] [-c configfile]" << std::endl;
+			std::cout << "Usage: " << argv[0] << " [-v|--verbose] [-d|--daemonize] [-c configfile]" << std::endl;
 			return 0;
 		}
 	}
